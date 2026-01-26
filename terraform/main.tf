@@ -21,14 +21,13 @@ terraform {
     }
   }
 
-  # Uncomment to use S3 backend for state (recommended for production)
-  # backend "s3" {
-  #   bucket         = "your-terraform-state-bucket"
-  #   key            = "affine/terraform.tfstate"
-  #   region         = "us-east-1"
-  #   encrypt        = true
-  #   dynamodb_table = "terraform-locks"
-  # }
+  backend "s3" {
+    bucket         = "affine-terraform-state-840334627686"
+    key            = "affine/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "affine-terraform-locks"
+  }
 }
 
 provider "aws" {
