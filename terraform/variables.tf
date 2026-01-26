@@ -143,3 +143,14 @@ variable "ssl_email" {
   type        = string
   default     = ""
 }
+
+# -----------------------------------------------------------------------------
+# AI/Copilot
+# -----------------------------------------------------------------------------
+
+variable "openai_api_key" {
+  description = "OpenAI API key for AFFiNE Copilot features"
+  type        = string
+  sensitive   = true
+  default     = ""
+}

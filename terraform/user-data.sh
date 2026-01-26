@@ -75,6 +75,50 @@ mkdir -p /opt/affine/data/config
 chown -R 1000:1000 /opt/affine
 
 # -----------------------------------------------------------------------------
+# Create AFFiNE config file (for copilot/AI features)
+# -----------------------------------------------------------------------------
+
+OPENAI_API_KEY="${openai_api_key}"
+
+if [ -n "$OPENAI_API_KEY" ] && [ "$OPENAI_API_KEY" != "" ]; then
+    echo "Configuring AFFiNE Copilot with OpenAI..."
+    cat > /opt/affine/data/config/config.json << CONFIG_EOF
+{
+  "copilot": {
+    "enabled": true,
+    "scenarios": {
+      "override_enabled": true,
+      "scenarios": {
+        "audio_transcribing": "gpt-4o-audio-preview",
+        "chat": "gpt-4o",
+        "embedding": "text-embedding-3-small",
+        "image": "gpt-image-1",
+        "rerank": "gpt-4o-mini",
+        "coding": "gpt-4o",
+        "complex_text_generation": "gpt-4o",
+        "quick_decision_making": "gpt-4o-mini",
+        "quick_text_generation": "gpt-4o-mini",
+        "polish_and_summarize": "gpt-4o-mini"
+      }
+    },
+    "providers": {
+      "openai": {
+        "apiKey": "$OPENAI_API_KEY",
+        "baseURL": "https://api.openai.com/v1"
+      }
+    }
+  }
+}
+CONFIG_EOF
+    chown 1000:1000 /opt/affine/data/config/config.json
+    echo "Copilot configured with OpenAI provider"
+else
+    echo "No OpenAI API key provided, copilot will be disabled"
+    echo '{}' > /opt/affine/data/config/config.json
+    chown 1000:1000 /opt/affine/data/config/config.json
+fi
+
+# -----------------------------------------------------------------------------
 # Create Docker Compose file
 # -----------------------------------------------------------------------------
 

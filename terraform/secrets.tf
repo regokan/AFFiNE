@@ -23,5 +23,6 @@ resource "aws_secretsmanager_secret_version" "affine" {
     ses_smtp_password = aws_iam_access_key.ses_smtp.ses_smtp_password_v4
     domain_name       = var.domain_name
     ses_domain        = var.ses_domain
+    openai_api_key    = var.openai_api_key
   })
 }

@@ -126,6 +126,7 @@ resource "aws_instance" "affine" {
     mailer_sender   = var.mailer_sender
     domain_name     = var.domain_name
     ssl_email       = var.ssl_email
+    openai_api_key  = var.openai_api_key
   }))
 
   tags = {
