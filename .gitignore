@@ -94,3 +94,21 @@ af.cmd
 
 # playwright
 storageState.json
+
+# Local Docker data
+.docker/dev/data/
+.docker/selfhost/data/
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/*.tfvars
+terraform/affine-key.pem
+terraform/.terraform.lock.hcl
+terraform/crash.log
+terraform/*.auto.tfvars
+terraform/*.pkg
+
+# Local documentation (not part of upstream)
+AGENTS.md
