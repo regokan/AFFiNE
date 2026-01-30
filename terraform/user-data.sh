@@ -90,15 +90,15 @@ if [ -n "$OPENAI_API_KEY" ] && [ "$OPENAI_API_KEY" != "" ]; then
       "override_enabled": true,
       "scenarios": {
         "audio_transcribing": "gpt-4o-audio-preview",
-        "chat": "gpt-4o",
-        "embedding": "text-embedding-3-small",
-        "image": "gpt-image-1",
-        "rerank": "gpt-4o-mini",
-        "coding": "gpt-4o",
-        "complex_text_generation": "gpt-4o",
-        "quick_decision_making": "gpt-4o-mini",
-        "quick_text_generation": "gpt-4o-mini",
-        "polish_and_summarize": "gpt-4o-mini"
+        "chat": "gpt-5.2",
+        "embedding": "text-embedding-3-large",
+        "image": "dall-e-3",
+        "rerank": "gpt-5-mini",
+        "coding": "gpt-5.2",
+        "complex_text_generation": "gpt-5.2",
+        "quick_decision_making": "gpt-5-mini",
+        "quick_text_generation": "gpt-5-mini",
+        "polish_and_summarize": "gpt-5-mini"
       }
     },
     "providers": {
@@ -153,6 +153,7 @@ services:
       - NODE_ENV=production
       - AFFINE_SERVER_HOST=0.0.0.0
       - AFFINE_SERVER_PORT=3010
+      - AFFINE_SERVER_EXTERNAL_URL=${domain_name != "" ? "https://${domain_name}" : ""}
       - DATABASE_URL=postgresql://${db_username}:${db_password}@${db_host}:${db_port}/${db_name}
       - REDIS_SERVER_HOST=redis
       - REDIS_SERVER_PORT=6379
