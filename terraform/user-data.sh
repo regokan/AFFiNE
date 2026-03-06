@@ -273,6 +273,7 @@ server {
     listen 80;
     listen [::]:80;
     server_name ${domain_name};
+    client_max_body_size 100M;
 
     # For Let's Encrypt validation
     location /.well-known/acme-challenge/ {
