@@ -166,7 +166,7 @@ services:
       affine_migration:
         condition: service_completed_successfully
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3010/info"]
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3010/info').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -328,7 +328,7 @@ Description=Certbot Renewal
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/certbot renew --quiet --deploy-hook "systemctl reload nginx"
+ExecStart=/usr/local/bin/certbot renew --quiet --no-random-sleep-on-renew --deploy-hook "systemctl reload nginx"
 CERTBOT_SERVICE
 
     cat > /etc/systemd/system/certbot-renewal.timer << 'CERTBOT_TIMER'
@@ -408,7 +408,7 @@ chmod +x /opt/affine/status.sh
 # SSL renewal script
 cat > /opt/affine/renew-ssl.sh << 'SCRIPT_EOF'
 #!/bin/bash
-certbot renew --quiet
+certbot renew --quiet --no-random-sleep-on-renew
 systemctl reload nginx
 SCRIPT_EOF
 chmod +x /opt/affine/renew-ssl.sh
